@@ -1,0 +1,19 @@
+# Documentation
+# - https://codeql.github.com/docs/codeql-cli/creating-codeql-query-suites/
+# - https://github.com/github/codeql/actions/workflows/query-list.yml
+# - https://github.com/github/codeql/blob/main/misc/suite-helpers/security-extended-selectors.yml
+# - https://codeql.github.com/docs/codeql-cli/creating-codeql-query-suites/#examples
+
+- description: "Custom JavaScript Suite"
+
+# Import/Extend from an existing CodeQL suite
+- import: codeql-suites/javascript-security-extended.qls
+  from: codeql-javascript
+
+
+# Exclude queries that are not relevant for my organisation or have a
+# higher False Positive rate than we are confident with.
+- exclude:
+    id:
+      # https://github.com/github/codeql/blob/main/javascript/ql/src/Security/CWE-770/MissingRateLimiting.ql
+      - js/missing-rate-limiting
