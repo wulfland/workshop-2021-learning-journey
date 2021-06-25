@@ -1,0 +1,18 @@
+name: "Custom CodeQL Configuration"
+
+# Disabling the default queries is critical part of this.
+# Nothing will be disabled if the default queries still run.
+# - https://docs.github.com/en/code-security/secure-coding/configuring-code-scanning#disabling-the-default-queries
+disable-default-queries: true
+
+queries:
+  # Point to the custom query suite that needs to be used
+  - uses: ./.github/codeql/custom-javascript.qls
+
+# Ignore some of the paths as these are some open source componants.
+# This only works for Interpreted Languages (JavaScript / TypeScript / Python)
+# - https://docs.github.com/en/code-security/secure-coding/automatically-scanning-your-code-for-vulnerabilities-and-errors/configuring-code-scanning#specifying-directories-to-scan
+paths-ignore:
+  - '**/node_modules'
+  # Ignoring our test folders
+  - '**/test'
